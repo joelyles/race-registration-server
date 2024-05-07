@@ -1,6 +1,12 @@
 const Registrant = require('../model/Registrants');
 
-const handleNewRegistrant = async (req, res) => {
+const getAllRegistrants = async (req, res) => {
+    const registrants = await Registrant.find();
+    if (!registrants) return res.status(204).json({'message': 'no registrants found'});
+    res.json(registrants);
+}
+
+const createNewRegistrant = async (req, res) => {
     if (!req?.body?.firstname 
             || !req?.body?.lastname 
             || !req?.body?.age 
@@ -23,7 +29,7 @@ const handleNewRegistrant = async (req, res) => {
                 },
             phone: req.body.phone,
             email: req.body.email
-        })
+        });
 
         res.status(201).json(result);
     } catch (error) {
@@ -31,4 +37,7 @@ const handleNewRegistrant = async (req, res) => {
     }
 }
 
-module.exports = { handleNewRegistrant }
+module.exports = {
+    getAllRegistrants,
+    createNewRegistrant
+}

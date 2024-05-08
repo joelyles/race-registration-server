@@ -6,4 +6,4 @@ router.route('/')
     .get(registerController.getAllRegistrants)
     .post(registerController.createNewRegistrant);
 
-module.exports = router
+module.exports = router;

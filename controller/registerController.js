@@ -7,6 +7,8 @@ const getAllRegistrants = async (req, res) => {
 }
 
 const createNewRegistrant = async (req, res) => {
+    const { firstname, lastname, age, state, phone, email } = req.body;
+
     if (!req?.body?.firstname 
             || !req?.body?.lastname 
             || !req?.body?.age 
@@ -14,24 +16,22 @@ const createNewRegistrant = async (req, res) => {
                 return res.status(400).json({'message': 'name, age, and email are required'});
             }
 
-    const duplicate = await Registrant.findOne({ email: req.body.email }).exec();
+    const duplicate = await Registrant.findOne({ email: email }).exec();
     
     if (duplicate) return res.sendStatus(409);
 
     try {
         const result = await Registrant.create({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            age: req.body.age,
-            home: {
-                city: req.body.city,
-                state: req.body.state
-                },
-            phone: req.body.phone,
-            email: req.body.email
+            "firstname": firstname,
+            "lastname": lastname,
+            "age": age,
+            "state": state,
+            "phone": phone,
+            "email": email
         });
 
-        res.status(201).json(result);
+        console.log(result)
+        res.status(201).json({ 'success': `${firstname}, your registration was submitted`});
     } catch (error) {
         console.log(error);
     }

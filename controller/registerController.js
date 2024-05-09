@@ -7,7 +7,7 @@ const getAllRegistrants = async (req, res) => {
 }
 
 const createNewRegistrant = async (req, res) => {
-    const { firstname, lastname, age, state, phone, email } = req.body;
+    const { firstname, lastname, age, home, phone, email } = req.body;
 
     if (!req?.body?.firstname 
             || !req?.body?.lastname 
@@ -25,7 +25,11 @@ const createNewRegistrant = async (req, res) => {
             "firstname": firstname,
             "lastname": lastname,
             "age": age,
-            "state": state,
+            "home":
+                {
+                    "city": home.city,
+                    "state": home.state
+                },
             "phone": phone,
             "email": email
         });

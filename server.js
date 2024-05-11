@@ -10,6 +10,7 @@ dbConnect();
 app.use(express.json());
 
 app.use('/register', require('./routes/register'));
+app.use('/userReg', require('./routes/userReg'));
 app.use('/registrants', require('./routes/api/registrants'));
 
 app.get('/', (req, res) => {

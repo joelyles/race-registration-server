@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const corsOptionsDelegate = require('./config/corsOptionsDelegate.js')
 const mongoose = require('mongoose');
 const dbConnect = require('./config/dbConnection.js');
 const PORT = process.env.PORT || 5000;
@@ -8,6 +10,8 @@ const PORT = process.env.PORT || 5000;
 dbConnect();
 
 app.use(express.json());
+
+app.use(cors(corsOptionsDelegate));
 
 app.use('/register', require('./routes/register'));
 app.use('/userReg', require('./routes/userReg'));

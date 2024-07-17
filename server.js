@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors(corsOptionsDelegate));
 
 app.use('/register', require('./routes/register'));
+app.use('/login', require('./routes/login'));
 app.use('/userReg', require('./routes/userReg'));
 app.use('/registrants', require('./routes/api/registrants'));
 
